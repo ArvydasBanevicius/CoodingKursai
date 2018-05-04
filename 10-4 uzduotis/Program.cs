@@ -8,20 +8,76 @@ namespace _10_4_uzduotis
 {
     class Program
     {
+        public Random RandObj;
+
+        public Program() // Constructor
+        {
+            RandObj = new Random();
+        }
+
+        ~Program() // destructor
+        {
+            Console.WriteLine("Paskutinsi pasisparymas");
+        }
+
         static void Main(string[] args)
         {
             var program = new Program();
-            var vartotojoVardas = program.VartotojoVardas();
-            program.Pasisveikinam(vartotojoVardas);
-            var amzius = program.VartotojoAmzius();
-            program.SitoTipoAmzius(amzius);
+            try
+            {
+                Console.WriteLine("Ivesti skaiciu sarasa");
+                var gauta = program.SkaiciusSarasas();
+                foreach (var sk in gauta)
+                {
+                    Console.WriteLine("Gauname rezultata {0}", sk);
+                }
 
-            var a = program.IvestiSkaiciu(1);
-            var b = program.IvestiSkaiciu(1);
+                Console.WriteLine("Sarasaso MAX dydis {0}", program.SarasasDidziuaiasElementas(gauta));
+                Console.WriteLine("Sarasaso suma {0}", program.SarasasSuma(gauta));
+                Console.WriteLine("Sarasaso vidurkis {0}", program.SarasasVidurkis(gauta));
 
-            Console.WriteLine("Gauname rezultata {0}", program.Skaiciujame(a, b));
+                var vartotojoVardas = program.VartotojoVardas();
+                program.Pasisveikinam(vartotojoVardas);
+                var amzius = program.VartotojoAmzius();
+                program.SitoTipoAmzius(amzius);
 
+                var a = program.IvestiSkaiciu(1);
+                var b = program.IvestiSkaiciu(1);
+
+                Console.WriteLine("Gauname rezultata {0}", program.Skaiciujame(a, b));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                //throw;
+            }
             Console.ReadLine();
+        }
+
+        public List<int> SkaiciusSarasas()
+        {
+            List<int> sarasa = new List<int>();
+            for (int i = 0; i < 30; i++)
+            { 
+                sarasa.Add(RandObj.Next(100));
+            }
+            return sarasa;
+        }
+
+        public int SarasasDidziuaiasElementas(List<int> Sarasas )
+        {
+            return Sarasas.Max();
+        }
+
+        public int SarasasSuma(List<int> Sarasas)
+        {
+            return Sarasas.Sum();
+        }
+
+        public double SarasasVidurkis(List<int> Sarasas)
+        {
+            return Sarasas.Average();
         }
 
         public int IvestiSkaiciu(int Sk)
