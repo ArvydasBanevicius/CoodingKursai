@@ -20,6 +20,8 @@ namespace _9_2_uzduotis
             }
             Console.WriteLine("Masyvo ilgis = {0}", ZodziuMasyvas.Count);
 
+
+            // Kazka pakeiciua
             int max = 0;
             int Index = 0;
             for (int i=0; i<ZodziuMasyvas.Count; i++)
