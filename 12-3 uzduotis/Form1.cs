@@ -14,44 +14,87 @@ namespace _12_3_uzduotis
     {
 
         int[,] ZaidziantysSkaiciai = new int[5, 5];
-        public int M, J, R, G, Z;
         Random rnd = new Random();
 
         public Form1()
         {
             InitializeComponent();
+            dataGridView1.ColumnCount = 5;
+            dataGridView1.RowCount = 5;
+            dataGridView1.Columns[0].Name = "M";
+            dataGridView1.Columns[1].Name = "J";
+            dataGridView1.Columns[2].Name = "R";
+            dataGridView1.Columns[3].Name = "G";
+            dataGridView1.Columns[4].Name = "Z";
+            NaujasZaidimas();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void SkaiciuojaSpalva(ref int[,] Masyvas, int Idx)
         {
-            for (int i = 0; i < 5; i++)
+            int i = 0;
+            while (i < 5)
             {
-                dataGridView1.Rows.Add("", "", "", "", "");
+                Pakartoti:
+                Masyvas[i, Idx] = rnd.Next((Idx * 15) + 1, (Idx * 15) + 15);
+                int j = 0;
+                while (j < i)
+                {
+                    if (Masyvas[j, Idx] == Masyvas[i, Idx]) goto Pakartoti;
+                    j++;
+                }
+                i++;
             }
         }
-
 
         private void NaujasZaidimas()
         {
+            int[,] ZaidimoSkaiciai = new int[5, 5];
+            SkaiciuojaSpalva(ref ZaidimoSkaiciai, 0);
+            SkaiciuojaSpalva(ref ZaidimoSkaiciai, 1);
+            SkaiciuojaSpalva(ref ZaidimoSkaiciai, 2);
+            SkaiciuojaSpalva(ref ZaidimoSkaiciai, 3);
+            SkaiciuojaSpalva(ref ZaidimoSkaiciai, 4);
             for (int i = 0; i < 5; i++)
             {
-                M = rnd.Next(1, 15);
-                J = rnd.Next(16, 30);
-                R = rnd.Next(31, 45);
-                G = rnd.Next(46, 60);
-                Z = rnd.Next(61, 75);
-//                dataGridView1.CellRows.Add(M, J, R, G, Z);
+                dataGridView1.Rows[i].Cells[0].Value = ZaidimoSkaiciai[i, 0];
+                dataGridView1.Rows[i].Cells[1].Value = ZaidimoSkaiciai[i, 1];
+                dataGridView1.Rows[i].Cells[2].Value = ZaidimoSkaiciai[i, 2];
+                dataGridView1.Rows[i].Cells[3].Value = ZaidimoSkaiciai[i, 3];
+                dataGridView1.Rows[i].Cells[4].Value = ZaidimoSkaiciai[i, 4];
             }
+            dataGridView1.Invalidate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            NaujasZaidimas();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            SkaiciuojaSpalva(ref ZaidziantysSkaiciai, 0);
+            SkaiciuojaSpalva(ref ZaidziantysSkaiciai, 1);
+            SkaiciuojaSpalva(ref ZaidziantysSkaiciai, 2);
+            SkaiciuojaSpalva(ref ZaidziantysSkaiciai, 3);
+            SkaiciuojaSpalva(ref ZaidziantysSkaiciai, 4);
+            dataGridView1.Invalidate();
         }
+
 
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-        //    e.ColumnIndex
+            try
+            {
+                if (Convert.ToInt32(e.Value) == ZaidziantysSkaiciai[e.ColumnIndex, e.RowIndex])
+                {
+                    e.CellStyle.BackColor = Color.Red;
+                    e.CellStyle.ForeColor = Color.White;
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
+
     }
 }
