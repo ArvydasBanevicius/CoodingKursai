@@ -85,7 +85,7 @@ namespace _12_3_uzduotis
         {
             try
             {
-                if (Convert.ToInt32(e.Value) == ZaidziantysSkaiciai[e.ColumnIndex, e.RowIndex])
+                if ((e.ColumnIndex >= 0)&&(e.RowIndex >= 0)&&(Convert.ToInt32(e.Value) == ZaidziantysSkaiciai[e.ColumnIndex, e.RowIndex]))
                 {
                     e.CellStyle.BackColor = Color.Red;
                     e.CellStyle.ForeColor = Color.White;
@@ -93,6 +93,7 @@ namespace _12_3_uzduotis
             }
             catch (Exception)
             {
+                MessageBox.Show("Kazkas negerai");
             }
         }
 

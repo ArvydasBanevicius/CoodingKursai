@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84ED4F03-9F26-4038-918A-4EB557EF6B3D}</ProjectGuid>
+    <ProjectGuid>{7A8E9A1F-5312-4805-8D3A-A3ED73D049AB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>_12_4_uzduotis</RootNamespace>
-    <AssemblyName>12-4 uzduotis</AssemblyName>
+    <RootNamespace>_12_5_uzduotis</RootNamespace>
+    <AssemblyName>12-5 uzduotis</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,10 +51,9 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="NativeMethods\SHFILEINFO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rasymas_i_faila.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
